@@ -227,9 +227,12 @@ button { font-family: inherit; cursor: pointer; }
   content: "";
   position: absolute; inset: 0;
   z-index: 1;
-  background: linear-gradient(120deg, rgba(11,29,69,0.82), rgba(13,76,68,0.72));
+  background: linear-gradient(90deg, rgba(4,10,24,0.75) 0%, rgba(4,10,24,0.45) 32%, rgba(4,10,24,0.08) 58%, rgba(4,10,24,0) 75%);
   pointer-events: none;
 }
+.hero-video .eyebrow { color: var(--color-gold-light); text-shadow: 0 2px 10px rgba(0,0,0,0.7); }
+.hero-video h1 { text-shadow: 0 2px 16px rgba(0,0,0,0.55); }
+.hero-video p.lead { text-shadow: 0 1px 12px rgba(0,0,0,0.6); color: rgba(255,255,255,0.95); }
 .breadcrumbs { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
 .breadcrumbs a { color: rgba(255,255,255,0.9); }
 .breadcrumbs a:hover { text-decoration: underline; }
