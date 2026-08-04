@@ -31,33 +31,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const heroSlider = document.getElementById('hero-slider');
-  if (heroSlider) {
-    const slides = heroSlider.querySelectorAll('.hero-slide-img');
-    const contents = heroSlider.querySelectorAll('.hero-slide-content');
-    const dots = heroSlider.querySelectorAll('.hero-dot');
-    let current = 0;
-    let timer;
-
-    function goTo(index) {
-      current = (index + slides.length) % slides.length;
-      slides.forEach((s, i) => s.classList.toggle('is-active', i === current));
-      contents.forEach((c, i) => c.classList.toggle('is-active', i === current));
-      dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
-    }
-
-    function startAutoplay() {
-      timer = setInterval(() => goTo(current + 1), 6000);
-    }
-
-    dots.forEach((dot) => {
-      dot.addEventListener('click', () => {
-        clearInterval(timer);
-        goTo(Number(dot.dataset.slideDot));
-        startAutoplay();
-      });
+  // Animación de aparición al hacer scroll (texto y tarjetas), estilo Rohe.
+  // Las clases .reveal se agregan acá por JS: si el script no corre, el contenido
+  // nunca queda oculto (no depende de una clase fija en el HTML).
+  const revealSelectors = [
+    '.hero-inner .eyebrow', '.hero-inner h1', '.hero-inner p.lead', '.hero-inner .hero-cta-row',
+    '.section-head', '.obj-card', '.pillar-card', '.product-card', '.product-row',
+    '.testimonial-card', '.trust-check', '.step-row', '.cert-card', '.cta-band',
+  ];
+  const revealEls = document.querySelectorAll(revealSelectors.join(', '));
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('is-visible'), (i % 4) * 90);
+        revealObserver.unobserve(entry.target);
+      }
     });
-
-    if (slides.length > 1) startAutoplay();
-  }
+  }, { threshold: 0.12 });
+  revealEls.forEach((el) => {
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+  });
 });
