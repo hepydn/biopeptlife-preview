@@ -206,7 +206,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 .hero-slider .hero-split-inner { position: relative; z-index: 2; width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 64px 24px 48px; }
 .hero-slider .hero-inner { max-width: 640px; }
-.hero-slider .eyebrow { text-shadow: 0 2px 10px rgba(0,0,0,0.7); }
+.hero-slider .eyebrow { color: var(--color-gold-light); text-shadow: 0 2px 10px rgba(0,0,0,0.7); }
 .hero-slider h1 { text-shadow: 0 2px 16px rgba(0,0,0,0.55); }
 .hero-slider p.lead { text-shadow: 0 1px 12px rgba(0,0,0,0.6); color: rgba(255,255,255,0.95); }
 .hero-slide-content { display: none; }
