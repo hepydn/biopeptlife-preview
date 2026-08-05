@@ -34,8 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Animación de aparición al hacer scroll (texto y tarjetas), estilo Rohe.
   // Las clases .reveal se agregan acá por JS: si el script no corre, el contenido
   // nunca queda oculto (no depende de una clase fija en el HTML).
+  // El hero (page-hero estático o el slider de inicio) ya tiene su propia
+  // animación de entrada, así que no se duplica acá.
   const revealSelectors = [
-    '.hero-inner .eyebrow', '.hero-inner h1', '.hero-inner p.lead', '.hero-inner .hero-cta-row',
+    '.page-hero .eyebrow', '.page-hero h1', '.page-hero p.lead',
     '.section-head', '.obj-card', '.pillar-card', '.product-card', '.product-row',
     '.testimonial-card', '.trust-check', '.step-row', '.cert-card', '.cta-band',
   ];
@@ -52,4 +54,41 @@ document.addEventListener('DOMContentLoaded', () => {
     el.classList.add('reveal');
     revealObserver.observe(el);
   });
+
+  // Slider del hero de inicio (video + fotos rotando)
+  const heroSlider = document.getElementById('hero-slider');
+  if (heroSlider) {
+    const media = heroSlider.querySelectorAll('.hero-slide-media');
+    const contents = heroSlider.querySelectorAll('.hero-slide-content');
+    const dots = heroSlider.querySelectorAll('.hero-dot');
+    let current = 0;
+    let timer;
+
+    function goTo(index) {
+      current = (index + media.length) % media.length;
+      media.forEach((m, i) => {
+        const active = i === current;
+        m.classList.toggle('is-active', active);
+        if (m.tagName === 'VIDEO') {
+          if (active) m.play().catch(() => {});
+        }
+      });
+      contents.forEach((c, i) => c.classList.toggle('is-active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+    }
+
+    function startAutoplay() {
+      timer = setInterval(() => goTo(current + 1), 6500);
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        clearInterval(timer);
+        goTo(Number(dot.dataset.slideDot));
+        startAutoplay();
+      });
+    });
+
+    if (media.length > 1) startAutoplay();
+  }
 });
