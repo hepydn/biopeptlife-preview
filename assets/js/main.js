@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     '.page-hero .eyebrow', '.page-hero h1', '.page-hero p.lead',
     '.section-head', '.obj-card', '.pillar-card', '.product-card', '.product-row',
     '.testimonial-card', '.trust-check', '.step-row', '.cert-card', '.cta-band',
+    '.ship-feature', '.ship-country-badge', '.ship-delivery-badge',
   ];
   const revealEls = document.querySelectorAll(revealSelectors.join(', '));
   const revealObserver = new IntersectionObserver((entries) => {

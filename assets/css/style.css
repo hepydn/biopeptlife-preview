@@ -3,20 +3,21 @@
    ========================================================================== */
 
 :root {
-  --color-navy: #122C66;
-  --color-navy-dark: #0B1D45;
-  --color-teal: #0D4C44;
-  --color-teal-light: #1E6B5D;
-  --color-teal-bright: #14919B;
-  --color-gold: #C19A6B;
-  --color-gold-light: #D8BD97;
+  /* Paleta nítida navy + cian eléctrico (definida por el cliente) */
+  --color-navy: #16244A;
+  --color-navy-dark: #060B18;
+  --color-teal: #2547D0;
+  --color-teal-light: #3B6BF2;
+  --color-teal-bright: #17E0EC;
+  --color-gold: #17E0EC;
+  --color-gold-light: #6BF0F7;
 
-  --color-text: #26293B;
-  --color-text-muted: #5B6072;
+  --color-text: #16244A;
+  --color-text-muted: #5B6478;
   --color-bg: #ffffff;
-  --color-bg-cream: #F6F4F0;
-  --color-bg-soft: #F3F5F5;
-  --color-border: #E5E7E7;
+  --color-bg-cream: #F1F5FD;
+  --color-bg-soft: #EDF2FC;
+  --color-border: #E1E7F5;
   --color-white: #ffffff;
 
   --font-heading: "Plus Jakarta Sans", "Segoe UI", sans-serif;
@@ -27,9 +28,9 @@
   --radius-md: 14px;
   --radius-lg: 24px;
 
-  --shadow-sm: 0 2px 10px rgba(18, 44, 102, 0.08);
-  --shadow-md: 0 10px 30px rgba(18, 44, 102, 0.12);
-  --shadow-lg: 0 24px 60px rgba(18, 44, 102, 0.18);
+  --shadow-sm: 0 2px 10px rgba(6, 11, 24, 0.10);
+  --shadow-md: 0 10px 30px rgba(6, 11, 24, 0.16);
+  --shadow-lg: 0 24px 60px rgba(6, 11, 24, 0.24);
 
   --container-width: 1200px;
   --header-height: 96px;
@@ -232,7 +233,7 @@ button { font-family: inherit; cursor: pointer; }
 .obj-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
 .obj-card::before {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(11,29,69,0.15), rgba(11,29,69,0.88));
+  background: linear-gradient(180deg, rgba(6,11,24,0.15), rgba(6,11,24,0.88));
   z-index: 1;
 }
 .obj-card-content { position: relative; z-index: 2; }
@@ -252,6 +253,37 @@ button { font-family: inherit; cursor: pointer; }
 .pillar-num { font-family: var(--font-mono); color: var(--color-gold); font-weight: 700; font-size: 0.85rem; margin-bottom: 14px; }
 .pillar-card h3 { font-size: 1rem; }
 .pillar-card p { color: var(--color-text-muted); font-size: 0.92rem; margin: 0; }
+
+/* ---------- Envíos internacionales ---------- */
+.ship-countries { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+.ship-country-badge {
+  background: rgba(23,224,236,0.1);
+  border: 1px solid rgba(23,224,236,0.35);
+  color: var(--color-gold-light);
+  font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem;
+  padding: 10px 20px; border-radius: 999px;
+}
+.ship-delivery-badge {
+  max-width: 480px; margin: 0 auto 48px;
+  text-align: center;
+  background: rgba(23,224,236,0.08);
+  border: 1.5px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 22px 28px;
+}
+.ship-delivery-badge strong { display: block; font-family: var(--font-heading); font-size: 1.4rem; color: var(--color-gold); margin-bottom: 6px; }
+.ship-delivery-badge span { color: rgba(255,255,255,0.75); font-size: 0.92rem; }
+.ship-feature { text-align: center; padding: 8px; }
+.ship-feature-icon {
+  width: 58px; height: 58px; margin: 0 auto 16px;
+  border-radius: 50%;
+  background: rgba(23,224,236,0.1);
+  border: 1px solid rgba(23,224,236,0.3);
+  color: var(--color-gold);
+  display: flex; align-items: center; justify-content: center;
+}
+.ship-feature h3 { color: var(--color-white); font-size: 1rem; }
+.ship-feature p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin: 0; }
 
 /* ---------- Trust / quality seal ---------- */
 .trust-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center; }
@@ -366,7 +398,7 @@ button { font-family: inherit; cursor: pointer; }
 .site-footer h4 { color: var(--color-white); font-family: var(--font-heading); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
 .footer-links { display: flex; flex-direction: column; gap: 11px; }
 .footer-links a:hover { color: var(--color-gold-light); }
-.footer-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(193,154,107,0.15); border: 1px solid rgba(193,154,107,0.3); color: var(--color-gold-light); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; padding: 8px 16px; border-radius: 999px; margin-top: 16px; }
+.footer-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(23,224,236,0.12); border: 1px solid rgba(23,224,236,0.3); color: var(--color-gold-light); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; padding: 8px 16px; border-radius: 999px; margin-top: 16px; }
 .footer-social { display: flex; gap: 12px; margin-top: 20px; }
 .footer-social a {
   width: 38px; height: 38px;
