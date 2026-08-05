@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // El hero (page-hero estático o el slider de inicio) ya tiene su propia
   // animación de entrada, así que no se duplica acá.
   const revealSelectors = [
-    '.page-hero .eyebrow', '.page-hero h1', '.page-hero p.lead',
+    '.page-hero .eyebrow', '.page-hero p.lead',
     '.section-head', '.obj-card', '.pillar-card', '.product-card', '.product-row',
     '.testimonial-card', '.trust-check', '.step-row', '.cert-card', '.cta-band',
     '.ship-feature', '.ship-country-badge', '.ship-delivery-badge',
@@ -55,6 +55,29 @@ document.addEventListener('DOMContentLoaded', () => {
     el.classList.add('reveal');
     revealObserver.observe(el);
   });
+
+  // Efecto de escritura (typewriter) para el título del hero, estilo Rohe.
+  let typeTimer;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function typeWriter(el) {
+    if (!el) return;
+    if (!el.dataset.fullText) el.dataset.fullText = el.textContent;
+    const full = el.dataset.fullText;
+    if (prefersReducedMotion) { el.textContent = full; return; }
+    clearTimeout(typeTimer);
+    el.textContent = '';
+    el.classList.add('is-typing');
+    let i = 0;
+    (function step() {
+      if (i <= full.length) {
+        el.textContent = full.slice(0, i);
+        i++;
+        typeTimer = setTimeout(step, 26);
+      } else {
+        el.classList.remove('is-typing');
+      }
+    })();
+  }
 
   // Slider del hero de inicio (video + fotos rotando)
   const heroSlider = document.getElementById('hero-slider');
@@ -76,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       contents.forEach((c, i) => c.classList.toggle('is-active', i === current));
       dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+      typeWriter(contents[current].querySelector('h1'));
     }
 
     function startAutoplay() {
@@ -90,6 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
+    typeWriter(contents[0].querySelector('h1'));
     if (media.length > 1) startAutoplay();
+  } else {
+    // Páginas con hero estático (page-hero): también tipeamos el h1 al cargar.
+    const staticH1 = document.querySelector('.page-hero h1');
+    if (staticH1) typeWriter(staticH1);
   }
 });

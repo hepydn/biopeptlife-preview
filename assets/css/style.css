@@ -183,6 +183,19 @@ button { font-family: inherit; cursor: pointer; }
 .hero-inner { max-width: 720px; position: relative; z-index: 2; }
 .hero .eyebrow { color: var(--color-gold-light); text-shadow: 0 2px 10px rgba(0,0,0,0.7); }
 .hero h1 { color: var(--color-white); text-shadow: 0 2px 16px rgba(0,0,0,0.55); }
+.hero h1.is-typing::after {
+  content: "";
+  display: inline-block;
+  width: 3px; height: 0.85em;
+  margin-left: 4px;
+  background: var(--color-gold);
+  vertical-align: -0.1em;
+  animation: caretBlink 0.9s steps(1) infinite;
+}
+@keyframes caretBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero h1.is-typing::after { animation: none; }
+}
 .hero p.lead { font-size: 1.15rem; color: rgba(255,255,255,0.95); max-width: 580px; text-shadow: 0 1px 12px rgba(0,0,0,0.6); }
 .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
 
