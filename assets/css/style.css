@@ -400,6 +400,12 @@ button { font-family: inherit; cursor: pointer; }
 .testimonial-author span { color: var(--color-text-muted); font-size: 0.78rem; }
 
 /* ---------- Resultados / antes-después ---------- */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 340px));
+  justify-content: center;
+  gap: 24px;
+}
 .result-card {
   margin: 0;
   border-radius: var(--radius-lg);
@@ -410,6 +416,9 @@ button { font-family: inherit; cursor: pointer; }
 .result-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .result-card img { width: 100%; height: auto; display: block; }
 .result-disclaimer { color: var(--color-text-muted); font-size: 0.8rem; margin-top: 28px; }
+@media (max-width: 720px) {
+  .results-grid { grid-template-columns: minmax(0, 340px); }
+}
 
 /* ---------- CTA band ---------- */
 .cta-band {
