@@ -88,14 +88,28 @@ document.addEventListener('DOMContentLoaded', () => {
     let current = 0;
     let timer;
 
+    function playWithFallback(m) {
+      m.play().catch(() => {
+        // Si el navegador bloquea el autoplay (ahorro de energía, datos
+        // reducidos, navegador in-app de WhatsApp, etc.) mostramos la
+        // imagen de portada del video como imagen fija en su lugar.
+        if (!m.dataset.fallbackApplied) {
+          m.dataset.fallbackApplied = 'true';
+          const fallbackImg = document.createElement('img');
+          fallbackImg.src = m.getAttribute('poster');
+          fallbackImg.alt = '';
+          fallbackImg.className = m.className;
+          m.replaceWith(fallbackImg);
+        }
+      });
+    }
+
     function goTo(index) {
       current = (index + media.length) % media.length;
       media.forEach((m, i) => {
         const active = i === current;
         m.classList.toggle('is-active', active);
-        if (m.tagName === 'VIDEO') {
-          if (active) m.play().catch(() => {});
-        }
+        if (m.tagName === 'VIDEO' && active) playWithFallback(m);
       });
       contents.forEach((c, i) => c.classList.toggle('is-active', i === current));
       dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
@@ -114,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
+    if (media[0] && media[0].tagName === 'VIDEO') playWithFallback(media[0]);
     typeWriter(contents[0].querySelector('h1'));
     if (media.length > 1) startAutoplay();
   } else {
