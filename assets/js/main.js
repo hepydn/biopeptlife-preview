@@ -1,3 +1,19 @@
+function playWithFallback(m) {
+  m.play().catch(() => {
+    // Si el navegador bloquea el autoplay (ahorro de energía, datos
+    // reducidos, navegador in-app de WhatsApp, etc.) mostramos la
+    // imagen de portada del video como imagen fija en su lugar.
+    if (!m.dataset.fallbackApplied) {
+      m.dataset.fallbackApplied = 'true';
+      const fallbackImg = document.createElement('img');
+      fallbackImg.src = m.getAttribute('poster');
+      fallbackImg.alt = '';
+      fallbackImg.className = m.className;
+      m.replaceWith(fallbackImg);
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.querySelector('.main-nav');
@@ -88,22 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let current = 0;
     let timer;
 
-    function playWithFallback(m) {
-      m.play().catch(() => {
-        // Si el navegador bloquea el autoplay (ahorro de energía, datos
-        // reducidos, navegador in-app de WhatsApp, etc.) mostramos la
-        // imagen de portada del video como imagen fija en su lugar.
-        if (!m.dataset.fallbackApplied) {
-          m.dataset.fallbackApplied = 'true';
-          const fallbackImg = document.createElement('img');
-          fallbackImg.src = m.getAttribute('poster');
-          fallbackImg.alt = '';
-          fallbackImg.className = m.className;
-          m.replaceWith(fallbackImg);
-        }
-      });
-    }
-
     function goTo(index) {
       current = (index + media.length) % media.length;
       media.forEach((m, i) => {
@@ -135,5 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Páginas con hero estático (page-hero): también tipeamos el h1 al cargar.
     const staticH1 = document.querySelector('.page-hero h1');
     if (staticH1) typeWriter(staticH1);
+    const pageHeroVideo = document.querySelector('.page-hero-video');
+    if (pageHeroVideo) playWithFallback(pageHeroVideo);
   }
 });
