@@ -211,13 +211,13 @@ button { font-family: inherit; cursor: pointer; }
   position: absolute; inset: 0;
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(3,7,17,0.92) 0%, rgba(3,7,17,0.72) 28%, rgba(3,7,17,0.35) 50%, rgba(3,7,17,0.08) 68%),
-    linear-gradient(0deg, rgba(3,7,17,0.55) 0%, rgba(3,7,17,0) 45%);
+    linear-gradient(90deg, rgba(3,7,17,0.72) 0%, rgba(3,7,17,0.48) 26%, rgba(3,7,17,0.18) 45%, rgba(3,7,17,0.02) 60%),
+    linear-gradient(0deg, rgba(3,7,17,0.4) 0%, rgba(3,7,17,0) 38%);
   pointer-events: none;
 }
 .hero-inner { max-width: 720px; position: relative; z-index: 2; }
-.hero .eyebrow { color: var(--color-gold-light); text-shadow: 0 2px 12px rgba(0,0,0,0.9); }
-.hero h1 { color: var(--color-white); text-shadow: 0 2px 20px rgba(0,0,0,0.85), 0 1px 3px rgba(0,0,0,0.9); }
+.hero .eyebrow { color: var(--color-gold-light); text-shadow: 0 1px 2px rgba(0,0,0,0.95), 0 2px 14px rgba(0,0,0,0.9); }
+.hero h1 { color: var(--color-white); text-shadow: 0 1px 3px rgba(0,0,0,0.95), 0 2px 22px rgba(0,0,0,0.9); }
 .hero h1.is-typing::after {
   content: "";
   display: inline-block;
@@ -231,7 +231,7 @@ button { font-family: inherit; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .hero h1.is-typing::after { animation: none; }
 }
-.hero p.lead { font-size: 1.15rem; color: rgba(255,255,255,0.97); max-width: 580px; text-shadow: 0 1px 14px rgba(0,0,0,0.85); }
+.hero p.lead { font-size: 1.15rem; color: rgba(255,255,255,0.97); max-width: 580px; text-shadow: 0 1px 2px rgba(0,0,0,0.9), 0 1px 14px rgba(0,0,0,0.85); }
 .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
 
 .page-hero { min-height: 340px; padding: 150px 0 60px; overflow: hidden; }
