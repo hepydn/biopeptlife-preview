@@ -35,10 +35,10 @@ function ensureWaModal() {
   modal.innerHTML = `
     <div class="wa-modal-box">
       <button type="button" class="wa-modal-close" aria-label="Cerrar">&times;</button>
-      <p>¿Desde qué región nos escribís?</p>
+      <p>¿Desde qué región nos escribes?</p>
       <div class="wa-modal-actions">
-        <button type="button" data-region="america">🌎 América</button>
-        <button type="button" data-region="europa">🌍 Europa</button>
+        <button type="button" data-region="america">América</button>
+        <button type="button" data-region="europa">Europa</button>
       </div>
     </div>`;
   document.body.appendChild(modal);
