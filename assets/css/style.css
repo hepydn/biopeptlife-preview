@@ -494,6 +494,41 @@ button { font-family: inherit; cursor: pointer; }
 }
 .wa-float:hover { transform: scale(1.08); }
 
+/* ---------- Selector de región de WhatsApp ---------- */
+.wa-modal {
+  display: none;
+  position: fixed; inset: 0; z-index: 200;
+  align-items: center; justify-content: center;
+  background: rgba(3,7,17,0.72);
+  padding: 20px;
+}
+.wa-modal.is-open { display: flex; }
+.wa-modal-box {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  max-width: 360px; width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+.wa-modal-box p { margin: 0 0 20px; font-weight: 700; color: var(--color-text); font-size: 1.05rem; }
+.wa-modal-actions { display: flex; flex-direction: column; gap: 12px; }
+.wa-modal-actions button {
+  font-family: var(--font-heading); font-weight: 700; font-size: 0.95rem;
+  padding: 14px 18px; border-radius: var(--radius-md);
+  border: 1px solid var(--color-border); background: var(--color-bg-soft);
+  color: var(--color-text); cursor: pointer; transition: border-color 0.2s ease, background 0.2s ease;
+}
+.wa-modal-actions button:hover { border-color: var(--color-gold); background: rgba(23,224,236,0.1); }
+.wa-modal-close {
+  position: absolute; top: 10px; right: 14px;
+  background: none; border: none; color: var(--color-text-muted);
+  font-size: 1.4rem; line-height: 1; cursor: pointer;
+}
+.wa-modal-close:hover { color: var(--color-text); }
+
 /* ---------- Scroll reveal (texto y tarjetas aparecen al hacer scroll) ---------- */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
