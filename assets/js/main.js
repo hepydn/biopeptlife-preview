@@ -14,65 +14,6 @@ function playWithFallback(m) {
   });
 }
 
-// Selector de región para WhatsApp: la web tiene un número para Europa y
-// otro para América. Los botones genéricos ("Contactar por WhatsApp",
-// "Iniciar mi transformación", el flotante, etc.) preguntan primero a qué
-// región pertenece el visitante y recuerdan la respuesta para no repreguntar.
-const WA_NUMBERS = { europa: '584125157902', america: '573197495242' };
-
-function openWhatsApp(number, text) {
-  window.open(`https://wa.me/${number}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
-}
-
-let waPendingText = null;
-
-function ensureWaModal() {
-  let modal = document.getElementById('wa-region-modal');
-  if (modal) return modal;
-  modal = document.createElement('div');
-  modal.id = 'wa-region-modal';
-  modal.className = 'wa-modal';
-  modal.innerHTML = `
-    <div class="wa-modal-box">
-      <button type="button" class="wa-modal-close" aria-label="Cerrar">&times;</button>
-      <p>¿Desde qué región nos escribes?</p>
-      <div class="wa-modal-actions">
-        <button type="button" data-region="america">América</button>
-        <button type="button" data-region="europa">Europa</button>
-      </div>
-    </div>`;
-  document.body.appendChild(modal);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal || e.target.classList.contains('wa-modal-close')) {
-      modal.classList.remove('is-open');
-      return;
-    }
-    const region = e.target.dataset.region;
-    if (region && waPendingText !== null) {
-      localStorage.setItem('wa_region', region);
-      modal.classList.remove('is-open');
-      openWhatsApp(WA_NUMBERS[region], waPendingText);
-      waPendingText = null;
-    }
-  });
-  return modal;
-}
-
-document.addEventListener('click', (e) => {
-  const link = e.target.closest(`a[href^="https://wa.me/${WA_NUMBERS.europa}"]`);
-  if (!link || link.classList.contains('wa-direct')) return;
-  e.preventDefault();
-  const url = new URL(link.href);
-  const text = url.searchParams.get('text') || '';
-  const savedRegion = localStorage.getItem('wa_region');
-  if (savedRegion && WA_NUMBERS[savedRegion]) {
-    openWhatsApp(WA_NUMBERS[savedRegion], text);
-    return;
-  }
-  waPendingText = text;
-  ensureWaModal().classList.add('is-open');
-});
-
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.querySelector('.main-nav');
