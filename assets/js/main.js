@@ -18,7 +18,7 @@ function playWithFallback(m) {
 // otro para América. Los botones genéricos ("Contactar por WhatsApp",
 // "Iniciar mi transformación", el flotante, etc.) preguntan primero a qué
 // región pertenece el visitante y recuerdan la respuesta para no repreguntar.
-const WA_NUMBERS = { europa: '393208661066', america: '573197495242' };
+const WA_NUMBERS = { europa: '584125157902', america: '573197495242' };
 
 function openWhatsApp(number, text) {
   window.open(`https://wa.me/${number}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
